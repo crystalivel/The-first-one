@@ -16,4 +16,11 @@ while (num > 0){
 }
 console.log(degits)
 
+let star = ["   *   ","  ***  "," ***** ","*******","   |   "];
+for (let i = 0; i <= star.length; i++){
+    let tree ="";
+    tree += star[i] + "<br>";
+    console.log(tree)
 
+}
+console.log(star.length)
