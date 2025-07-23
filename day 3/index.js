@@ -22,7 +22,7 @@ console.log(Digits(123456))
 let star = ["   *   ","  ***  "," ***** ","*******","   |   "];
 for (let i = 0; i <= star.length; i++){
     let tree ="";
-    tree += star[i];
+    tree = star[i];
     console.log(tree)
 
 }
@@ -84,13 +84,14 @@ return note;
 }
 console.log(myGrade(83))
 function extendedFactorial (n, p){
-    let nNum;
-    let pNum;
-    let C;
-    nNum = factorial(n)
-    pNum = factorial(p)
-    C = nNum / (pNum * (factorial(n-p)))
-    return C; 
+    // let nNum;
+    // let pNum;
+    // let C;
+    // nNum = factorial(n)
+    // pNum = factorial(p)
+    // C = nNum / (pNum * (factorial(n-p)))
+    // return C; 
+    return factorial(n) / (factorial(p)*factorial(n-p))
 }
 console.log(extendedFactorial(5,2))
 function calc(num1,ope,num2){
@@ -116,4 +117,5 @@ function calc(num1,ope,num2){
         break;
         
     }
-    return sum
+    return sum;
+}

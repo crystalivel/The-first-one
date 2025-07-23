@@ -11,10 +11,13 @@ const perimeter = (2 * PI) * radius
 const motivation = "A wise man named " + favoritesuperhero + ' : ' + favoritequote
 {let a = 3;
 let b = 10;
-[a , b] = [b , a] 
+let temp; 
+temp = a 
+a = b 
+b = temp
 console.log("After swapping: a = ", a, " and b = ", b); } 
 /* conditional and statment */
-const num = 6
+const num = 4
 if (Math.round(num/2) == num/2){
     console.log("even") }
     else {
@@ -51,8 +54,16 @@ switch (day) {
 let a = -15;
 let b = 6;
 let c = 2.6;
-
-console.log(Math.max(a,b,c));
+if (a > b && a > c )
+{
+ console.log(a, " is greater than all")   
+}
+if (b > a && b > c){
+ console.log(b, " is greater than all")   
+}
+if(c > a && c > b){
+ console.log(c," is greater than all")   
+}
 }
 let score = 83 
 if (score > 85){ 
