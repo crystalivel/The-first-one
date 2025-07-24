@@ -36,22 +36,22 @@ function double (num) {
     return dnumb;
     
 }
-console.log(double(numb))
-function pairofsocks(arr) {
-  const countMap = {};
-  let totalPairs = 0;
-  for (const num of arr) {
-    countMap[num] = (countMap[num] || 0) + 1;
-  }
-
-  for (const num in countMap) {
-    const count = countMap[num];
-    const pairs = Math.floor(count / 2);
-    if (pairs > 0) {
-      totalPairs += pairs;
+  console.log(double(numb))
+  function pairofsocks(arr) {
+    const countMap = {};
+    let totalPairs = 0;
+    for (const num of arr) {
+      countMap[num] = (countMap[num] || 0) + 1;
     }
-  }
-  return totalPairs;
+
+    for (const num in countMap) {
+      const count = countMap[num];
+      const pairs = Math.floor(count / 2);
+      if (pairs > 0) {
+        totalPairs += pairs;
+      }
+    }
+    return totalPairs;
 }
 
 console.log("the number of pairs is ",pairofsocks(socks))

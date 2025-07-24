@@ -31,4 +31,12 @@ const Myperson = {
     const p2 = new person("lily adams",32);
     const p3 = new person("pere cottard",46); 
 
-    
+
+      class reccuringNumbers {
+        constructor(arr,count){
+        this.arr = arr;
+        this.count = count; 
+        }
+        }
+        
+    const reccurant = new reccuringNumbers([1,2,3,4,5,6,7,8,9,1,5,6],0);
