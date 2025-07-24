@@ -31,12 +31,25 @@ const Myperson = {
     const p2 = new person("lily adams",32);
     const p3 = new person("pere cottard",46); 
 
+class reccuringNumber {
+    findMostRecurring(arr) {
+        const recMap = new Map();
+        let maxCount = 0;
+        let mostRecurring = null;
 
-      class reccuringNumbers {
-        constructor(arr,count){
-        this.arr = arr;
-        this.count = count; 
+        for (let num of arr) {
+            let count = recMap.get(num) || 0;
+            count++;
+            recMap.set(num, count);
+            if (count > maxCount) {
+                maxCount = count;
+                mostRecurring = num;
+            }
         }
-        }
-        
-    const reccurant = new reccuringNumbers([1,2,3,4,5,6,7,8,9,1,5,6],0);
+
+        return {
+            number: mostRecurring,
+            count: maxCount
+        };
+    }
+}
