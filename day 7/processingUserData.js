@@ -16,4 +16,5 @@ async function getnoMaleUsers () {
 
 console.log(nameAndAgeList(await getnoMaleUsers()));
 
-
+const cheese = ['Steven','alex','james']
+[]
