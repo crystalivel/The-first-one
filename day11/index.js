@@ -1,5 +1,6 @@
 //first task
 const xlsx = require('xlsx');
+const fs = require('fs');
 
 const workbook = xlsx.readFile('./employee_data_.xlsx');
 const sheetName = workbook.SheetNames[0];
@@ -38,4 +39,6 @@ function calculateBonus(salary) {
 const newWorkbook = xlsx.utils.book_new();
 const newSheet = xlsx.utils.json_to_sheet(processedData);
 xlsx.utils.book_append_sheet(newWorkbook, newSheet, "BonusResults");
+fs.unlinkSync(`./oldProccedEmployeeData.xlsx`)
+fs.renameSync(`./ProccedEmployeeData.xlsx`,`./OldProccedEmployeeData.xlsx`)
 xlsx.writeFile(newWorkbook, './ProccedEmployeeData.xlsx');
