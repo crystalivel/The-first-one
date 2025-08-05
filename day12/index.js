@@ -64,7 +64,7 @@ rl.question('input the name\n', (name) => {
                     
                     saveContact(contact)
                     console.log(`${contact.name} contact has been saved`)
-                    footer()
+                    Createfooter()
                 } 
             } )
         }else {
@@ -73,7 +73,7 @@ rl.question('input the name\n', (name) => {
             phoneNumber: phoneNumber
                             }
                     console.log(`${contact.name} contact has been saved`)
-                    footer()
+                    Createfooter()
                     saveContact(contact)
             }
          
@@ -101,7 +101,7 @@ function mainOp(){
             }
     })
 }
-mainOp()
+
     function footer(){
         rl.question(`0-GO back | 1- Exit`,(Response)=> {
             switch (Response) {
@@ -111,5 +111,24 @@ mainOp()
                 case('1'):
                 rl.close()
                 break;
+                default: 
+                console.log(`ERROR`)
             }
             })}
+    function Createfooter(){
+                rl.question(`0-GO back | 1- Exit |2-Create more`,(Response)=> {
+            switch (Response) {
+                case('0'):
+                mainOp()
+                break;
+                case('1'):
+                rl.close()
+                break;
+                case('2'):
+                requestInfo()
+                break;
+                default: 
+                console.log(`ERROR`)
+                break;
+    }})}
+mainOp()
