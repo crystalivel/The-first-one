@@ -39,6 +39,5 @@ function calculateBonus(salary) {
 const newWorkbook = xlsx.utils.book_new();
 const newSheet = xlsx.utils.json_to_sheet(processedData);
 xlsx.utils.book_append_sheet(newWorkbook, newSheet, "BonusResults");
-fs.unlinkSync(`./oldProccedEmployeeData.xlsx`)
 fs.renameSync(`./ProccedEmployeeData.xlsx`,`./OldProccedEmployeeData.xlsx`)
 xlsx.writeFile(newWorkbook, './ProccedEmployeeData.xlsx');
