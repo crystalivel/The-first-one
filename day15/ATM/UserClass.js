@@ -1,12 +1,12 @@
 class User {
-    #passworld;
-    constructor (Id,firstName,lastName,age,pin,balance,transactionHistory){
-        this.Id = Id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    #pin;
+    constructor (accountID,name,age,pin,balance,transactions){
+        this.accountID = accountID;
+        this.name = name ;
         this.age = age;
         this.pin = pin;
-        this.balance = balance
-        this.transactionHistory = transactionHistory;
+        this.balance = balance;
+        this.transactions = transactions
     }
 }
+module.exports = User;

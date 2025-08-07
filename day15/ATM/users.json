@@ -2,17 +2,18 @@
   {
     "accountID": "ACC1001",
     "name": "John Doe",
+    "age": "56",
     "pin": "1234",
-    "balance": 1500.0,
+    "balance": 1500,
     "transactions": [
       {
         "type": "deposit",
-        "amount": 500.0,
+        "amount": 500,
         "date": "2024-02-01"
       },
       {
         "type": "withdraw",
-        "amount": 200.0,
+        "amount": 200,
         "date": "2024-02-02"
       }
     ]
@@ -20,19 +21,46 @@
   {
     "accountID": "ACC1002",
     "name": "Jane Smith",
+    "age": "56",
     "pin": "4321",
-    "balance": 2200.0,
+    "balance": 2200,
     "transactions": [
       {
         "type": "deposit",
-        "amount": 1000.0,
+        "amount": 1000,
         "date": "2024-02-03"
       },
       {
         "type": "withdraw",
-        "amount": 300.0,
+        "amount": 300,
         "date": "2024-02-04"
       }
     ]
+  },
+  {
+    "accountID": "ACC1003",
+    "name": "yassine maati",
+    "age": 23,
+    "pin": "IA30",
+    "balance": 0,
+    "transactionHistory": {
+      "transaction": []
+    }
+  },
+  {
+    "accountID": "ACC1004",
+    "name": "saad maati",
+    "age": 19,
+    "pin": "DT10",
+    "balance": 0,
+    "transactions": []
+  },
+  {
+    "accountID": "ACC1005",
+    "name": "ali ahmed",
+    "age": 43,
+    "pin": "AE30",
+    "balance": 0,
+    "transactions": []
   }
 ]
