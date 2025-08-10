@@ -78,7 +78,7 @@ function ask(question) {
 async function createAccount() {
         const firstName = await ask('input your First Name:')
         const lastName = await ask('input your Last Name:')
-        name = firstName + ' ' + lastName
+        let name = firstName + ' ' + lastName
         let age;
         const Inputage = await ask('input your Age:')
         if (!isNaN(Inputage) && !Number(Inputage) >= 0) {

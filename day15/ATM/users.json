@@ -7,6 +7,21 @@
     "balance": 1500,
     "transactions": [
       {
+        "type": "withdraw",
+        "amount": "100",
+        "date": "2025-08-07"
+      },
+      {
+        "type": "withdraw",
+        "amount": "100",
+        "date": "2025-08-07"
+      },
+      {
+        "type": "withdraw",
+        "amount": "500",
+        "date": "2025-08-07"
+      },
+      {
         "type": "deposit",
         "amount": 500,
         "date": "2024-02-01"
@@ -15,6 +30,11 @@
         "type": "withdraw",
         "amount": 200,
         "date": "2024-02-02"
+      },
+      {
+        "type": "withdraw",
+        "amount": 100,
+        "date": "2025-08-07"
       }
     ]
   },

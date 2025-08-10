@@ -20,14 +20,16 @@ console.time('timer')
 function gamblerSearch (arr, number) {
     let yay = true;
     let leg = arr.length
+    let jackpot = 0;
         while (yay) {
+        jackpot++
         luck = Math.floor(Math.random()*leg)
         if(arr[luck] === number) {
             yay = false 
-            return(`found at index ${luck}`)
+            return(`found at index ${luck} in ${jackpot} `)
 
         }}}
-console.log(binarySearch([0,
+console.log(gamblerSearch([0,
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
   11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
