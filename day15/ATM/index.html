@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="atm-container">
+        <div id="login-screen">
+            <h1>Welcome to the ATM</h1>
+            <div id="login-form">
+                <input type="text" id="account-id" placeholder="Account ID">
+                <input type="password" id="pin" placeholder="PIN">
+                <button id="login-btn" disabled>Login</button>
+                <button id="create-account-btn">Create Account</button>
+            </div>
+        </div>
+
+        <div id="create-account-screen" class="hidden">
+            <h1>Create New Account</h1>
+            <input type="text" id="first-name" placeholder="First Name">
+            <input type="text" id="last-name" placeholder="Last Name">
+            <input type="number" id="age" placeholder="Age">
+            <button id="submit-create-account-btn">Create</button>
+            <button class="back-to-login-btn">Back to Login</button>
+        </div>
+
+        <div id="main-menu-screen" class="hidden">
+            <h1 id="welcome-message"></h1>
+            <div id="action-buttons">
+                <button id="check-balance-btn">Check Balance</button>
+                <button id="transaction-history-btn">Transaction History</button>
+                <button id="transaction-btn">Withdraw/Deposit</button>
+                <button id="logout-btn">Logout</button>
+            </div>
+            <div id="content-display"></div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
