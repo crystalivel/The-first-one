@@ -10,6 +10,6 @@ async function theWeatherApp(city) {
         const responsedetail = await fetch(detail)
         const datatemp = await responsedetail.json();
         return `
-        ${city} is temperature: ${datatemp.current_weather.temperature}`
+        ${city} temperature is:  ${datatemp.current_weather.temperature} ℃`
         }
 module.exports = theWeatherApp

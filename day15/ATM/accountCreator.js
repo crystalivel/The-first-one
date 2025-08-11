@@ -94,4 +94,5 @@ async function createAccount() {
         console.log(`your new ID is ${accountID} and your new pin is ${pin}`)
 
 }
+createAccount()
 module.exports = {ask, createAccount }

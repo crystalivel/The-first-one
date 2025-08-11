@@ -7,9 +7,9 @@ const server = http.createServer(async(req, res) => {
     const path = parsedUrl.pathname;
     const query = parsedUrl.query;
 
-    if (path === '/users') {
+    if (path === '/main') {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end('I am a list of users :)');
+        res.end('I am a main page :)');
     } else if (path === '/weatherApp') {
         const city = query.city;
         const weatherApp = theWeatherApp(city)

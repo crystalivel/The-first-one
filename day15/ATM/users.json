@@ -82,5 +82,13 @@
     "pin": "AE30",
     "balance": 0,
     "transactions": []
+  },
+  {
+    "accountID": "ACC1006",
+    "name": "yassine maati",
+    "age": 23,
+    "pin": "SI14",
+    "balance": 0,
+    "transactions": []
   }
 ]

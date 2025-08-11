@@ -5,7 +5,7 @@ async function WeatherApp() {
         const detail = `https://geocoding-api.open-meteo.com/v1/search?name=${name.city}&count=10&language=en&format=json`
         const responsedetail = await fetch(detail);
         const datagio = await responsedetail.json();
-        if (!datagio.results || datagio.results.length === 0) {
+        if (!datagio.results || datagio.results.length == 0) {
             throw new Error(`No geocoding results for city: ${name.city}`);
         }
         const { latitude, longitude } = datagio.results[0];
