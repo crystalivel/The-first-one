@@ -88,7 +88,7 @@ app.delete('/products/:id',(req,res) => {
     if (productindex === -1){ 
         return res.status(404).json({error:"product not found"})
     }
-    const deletedproduct = products.slice(productindex,1)[0]
+    const deletedproduct = products.splice(productindex,1)
     res.json({message:"product deleted", product: deletedproduct})
 })
 app.listen(port, () => {    
