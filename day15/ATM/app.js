@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logout-btn');
     const checkBalanceBtn = document.getElementById('check-balance-btn');
     const transactionHistoryBtn = document.getElementById('transaction-history-btn');
-    const transactionBtn = document.getElementById('transaction-btn');
+    const withdrawBtn = document.getElementById('withdraw-btn');
+    const depositBtn = document.getElementById('deposit-btn');
 
     // Inputs
     const accountIdInput = document.getElementById('account-id');
@@ -196,28 +197,44 @@ document.addEventListener('DOMContentLoaded', () => {
         contentDisplay.innerHTML = historyHtml;
     });
 
-    transactionBtn.addEventListener('click', () => {
-        const action = prompt('Enter "withdraw" or "deposit":');
-        if (action === 'withdraw') {
-            const amount = parseFloat(prompt('Enter amount to withdraw:'));
-            if (!isNaN(amount) && amount > 0 && amount <= currentUser.balance) {
-                currentUser.balance -= amount;
-                currentUser.addTransaction('withdraw', amount);
-                alert('Withdrawal successful.');
-                checkBalanceBtn.click();
-            } else {
-                alert('Invalid amount or insufficient balance.');
-            }
-        } else if (action === 'deposit') {
-            const amount = parseFloat(prompt('Enter amount to deposit:'));
-            if (!isNaN(amount) && amount > 0) {
-                currentUser.balance += amount;
-                currentUser.addTransaction('deposit', amount);
-                alert('Deposit successful.');
-                checkBalanceBtn.click();
-            } else {
-                alert('Invalid amount.');
-            }
+    depositBtn.addEventListener('click', () => {
+        const amount = parseFloat(prompt('Enter amount to deposit:'));
+        if (!isNaN(amount) && amount > 0) {
+            currentUser.balance += amount;
+            currentUser.addTransaction('deposit', amount);
+            alert('Deposit successful.');
+            checkBalanceBtn.click();
+        } else {
+            alert('Invalid amount.');
         }
+    });
+
+    withdrawBtn.addEventListener('click', () => {
+        const today = new Date().toISOString().split('T')[0];
+        const todaysWithdrawals = currentUser.transactions
+            .filter(tx => tx.type === 'withdraw' && tx.date === today)
+            .reduce((total, tx) => total + tx.amount, 0);
+
+        const amount = parseFloat(prompt('Enter amount to withdraw:'));
+
+        if (isNaN(amount) || amount <= 0) {
+            alert('Invalid amount.');
+            return;
+        }
+
+        if (todaysWithdrawals + amount > 5000) {
+            alert(`You have already withdrawn $${todaysWithdrawals} today. You cannot withdraw more than $5000 in a day.`);
+            return;
+        }
+
+        if (amount > currentUser.balance) {
+            alert('Insufficient balance.');
+            return;
+        }
+
+        currentUser.balance -= amount;
+        currentUser.addTransaction('withdraw', amount);
+        alert('Withdrawal successful.');
+        checkBalanceBtn.click();
     });
 });
