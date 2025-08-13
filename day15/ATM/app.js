@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentUser = null;
 
     // Fetch user data
-    fetch('users.json')
+    fetch('/api/users')
         .then(response => response.json())
         .then(data => {
             users = data.map(user => new User(
@@ -160,25 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    submitCreateAccountBtn.addEventListener('click', () => {
-        const firstName = firstNameInput.value;
-        const lastName = lastNameInput.value;
-        const age = parseInt(ageInput.value, 10);
-
-        if (firstName && lastName && age) {
-            const name = `${firstName} ${lastName}`;
-            const lastUser = users[users.length - 1];
-            const newAccountID = incrementID(lastUser ? lastUser.accountID : 'aaa0000');
-            const newPin = createPin(firstName, lastName, age);
-            const newUser = new User(newAccountID, name, age, newPin, 0, []);
-            users.push(newUser);
-            alert(`Account created!\nAccount ID: ${newAccountID}\nPIN: ${newPin}`);
-            showScreen(loginScreen);
-        } else {
-            alert('Please fill in all fields.');
-        }
-    });
-
     logoutBtn.addEventListener('click', () => {
         currentUser = null;
         accountIdInput.value = '';
@@ -224,6 +205,40 @@ document.addEventListener('DOMContentLoaded', () => {
     depositBtn.addEventListener('click', () => showModal('deposit'));
     withdrawBtn.addEventListener('click', () => showModal('withdraw'));
 
+    async function saveUsers() {
+        try {
+            await fetch('/api/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(users, null, 2),
+            });
+        } catch (error) {
+            console.error('Failed to save users:', error);
+        }
+    }
+
+    submitCreateAccountBtn.addEventListener('click', () => {
+        const firstName = firstNameInput.value;
+        const lastName = lastNameInput.value;
+        const age = parseInt(ageInput.value, 10);
+
+        if (firstName && lastName && age) {
+            const name = `${firstName} ${lastName}`;
+            const lastUser = users[users.length - 1];
+            const newAccountID = incrementID(lastUser ? lastUser.accountID : 'aaa0000');
+            const newPin = createPin(firstName, lastName, age);
+            const newUser = new User(newAccountID, name, age, newPin, 0, []);
+            users.push(newUser);
+            saveUsers(); // Save changes
+            alert(`Account created!\nAccount ID: ${newAccountID}\nPIN: ${newPin}`);
+            showScreen(loginScreen);
+        } else {
+            alert('Please fill in all fields.');
+        }
+    });
+
     modalSubmitBtn.addEventListener('click', () => {
         const amount = parseFloat(modalInput.value);
 
@@ -235,6 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentTransactionType === 'deposit') {
             currentUser.balance += amount;
             currentUser.addTransaction('deposit', amount);
+            saveUsers(); // Save changes
             hideModal();
             checkBalanceBtn.click();
         } else if (currentTransactionType === 'withdraw') {
@@ -255,6 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             currentUser.balance -= amount;
             currentUser.addTransaction('withdraw', amount);
+            saveUsers(); // Save changes
             hideModal();
             checkBalanceBtn.click();
         }
