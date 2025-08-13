@@ -26,6 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const welcomeMessage = document.getElementById('welcome-message');
     const contentDisplay = document.getElementById('content-display');
 
+    // Modal
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalInput = document.getElementById('modal-input');
+    const modalSubmitBtn = document.getElementById('modal-submit-btn');
+    const modalCancelBtn = document.getElementById('modal-cancel-btn');
+    const modalMessage = document.getElementById('modal-message');
+
     let users = [];
     let currentUser = null;
 
@@ -197,44 +205,58 @@ document.addEventListener('DOMContentLoaded', () => {
         contentDisplay.innerHTML = historyHtml;
     });
 
-    depositBtn.addEventListener('click', () => {
-        const amount = parseFloat(prompt('Enter amount to deposit:'));
-        if (!isNaN(amount) && amount > 0) {
-            currentUser.balance += amount;
-            currentUser.addTransaction('deposit', amount);
-            alert('Deposit successful.');
-            checkBalanceBtn.click();
-        } else {
-            alert('Invalid amount.');
-        }
-    });
+    let currentTransactionType = null;
 
-    withdrawBtn.addEventListener('click', () => {
-        const today = new Date().toISOString().split('T')[0];
-        const todaysWithdrawals = currentUser.transactions
-            .filter(tx => tx.type === 'withdraw' && tx.date === today)
-            .reduce((total, tx) => total + tx.amount, 0);
+    function showModal(type) {
+        currentTransactionType = type;
+        modalTitle.textContent = type === 'deposit' ? 'Enter amount to deposit' : 'Enter amount to withdraw';
+        modalInput.value = '';
+        modalMessage.textContent = '';
+        modal.classList.add('visible');
+    }
 
-        const amount = parseFloat(prompt('Enter amount to withdraw:'));
+    function hideModal() {
+        modal.classList.remove('visible');
+    }
+
+    modalCancelBtn.addEventListener('click', hideModal);
+
+    depositBtn.addEventListener('click', () => showModal('deposit'));
+    withdrawBtn.addEventListener('click', () => showModal('withdraw'));
+
+    modalSubmitBtn.addEventListener('click', () => {
+        const amount = parseFloat(modalInput.value);
 
         if (isNaN(amount) || amount <= 0) {
-            alert('Invalid amount.');
+            modalMessage.textContent = 'Invalid amount.';
             return;
         }
 
-        if (todaysWithdrawals + amount > 5000) {
-            alert(`You have already withdrawn $${todaysWithdrawals} today. You cannot withdraw more than $5000 in a day.`);
-            return;
-        }
+        if (currentTransactionType === 'deposit') {
+            currentUser.balance += amount;
+            currentUser.addTransaction('deposit', amount);
+            hideModal();
+            checkBalanceBtn.click();
+        } else if (currentTransactionType === 'withdraw') {
+            const today = new Date().toISOString().split('T')[0];
+            const todaysWithdrawals = currentUser.transactions
+                .filter(tx => tx.type === 'withdraw' && tx.date === today)
+                .reduce((total, tx) => total + tx.amount, 0);
 
-        if (amount > currentUser.balance) {
-            alert('Insufficient balance.');
-            return;
-        }
+            if (todaysWithdrawals + amount > 5000) {
+                modalMessage.textContent = `Daily withdrawal limit of $5000 exceeded.`;
+                return;
+            }
 
-        currentUser.balance -= amount;
-        currentUser.addTransaction('withdraw', amount);
-        alert('Withdrawal successful.');
-        checkBalanceBtn.click();
+            if (amount > currentUser.balance) {
+                modalMessage.textContent = 'Insufficient balance.';
+                return;
+            }
+
+            currentUser.balance -= amount;
+            currentUser.addTransaction('withdraw', amount);
+            hideModal();
+            checkBalanceBtn.click();
+        }
     });
 });
