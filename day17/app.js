@@ -1,7 +1,7 @@
 const express = require('express');
 
 const app = express();
-const port = 3000
+const port = 5000
 
 app.use(express.json())
 
@@ -72,25 +72,25 @@ app.post('/product', (req, res) => {
     products.push(newProduct);
     res.status(201).json(newProduct)
 })
-app.put('/products/:id',(req,res) => {
+app.put('/products/:id', (req, res) => {
     const productID = parseInt(req.params.id)
     const updatedData = req.body
     const product = products.find(p => p.id === productID)
-    if (!product){
-        return res.status(404)({error:"product does not exist"})
+    if (!product) {
+        return res.status(404)({ error: "product does not exist" })
     }
     Object.assign(product, updatedData)
-    res.json({message:"product updated successfully" ,product})
+    res.json({ message: "product updated successfully", product })
 })
-app.delete('/products/:id',(req,res) => {
+app.delete('/products/:id', (req, res) => {
     const productID = parseInt(req.params.id)
     const productindex = products.findIndex(p => p.id === productID)
-    if (productindex === -1){ 
-        return res.status(404).json({error:"product not found"})
+    if (productindex === -1) {
+        return res.status(404).json({ error: "product not found" })
     }
-    const deletedproduct = products.splice(productindex,1)
-    res.json({message:"product deleted", product: deletedproduct})
+    const deletedproduct = products.splice(productindex, 1)
+    res.json({ message: "product deleted", product: deletedproduct })
 })
-app.listen(port, () => {    
+app.listen(port, () => {
     console.log(`server is running on port ${port}`)
 })
