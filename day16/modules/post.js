@@ -1,53 +1,38 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require ('fs')
+const path = require ('path');
+const { json } = require('stream/consumers');
 
-const filePath = path.join(__dirname, '../data/posts.json');
-function readPostsFromFile() {
-  try {
-    const data = fs.readFileSync(filePath, 'utf-8');
-    return JSON.parse(data);
-  } catch (err) {
-    console.error('Error reading posts:', err);
-    return [];
-  }
+
+
+const filePath = path.join(__dirname,'../data/post.js');
+
+
+function generateId () {
+  return Date.now().toString() + Math.floor(Math.random()*9999).toString();
 }
-function writePostsToFile(posts) {
-  try {
-    fs.writeFileSync(filePath, JSON.stringify(posts, null, 2), 'utf-8');
-  } catch (err) {
-    console.error('Error writing posts:', err);
-  }
+function readPostFile() {
+  const data = fs.readFileSync(filePath, 'utf-8')
+  return JSON.parse(data)
 }
 
-exports.getAllPosts = () => {
-  return readPostsFromFile();
-};
-exports.createPost = (postData) => {
-  const posts = readPostsFromFile();
+function writePostsFile(data){
+  const data = fs .readFileSync(filePath,'utf-8')
+  return JSON.parse(data)
+}
 
-  const newPost = {
-    id: Date.now(),
-    title: postData.title,
-    content: postData.content
-  };
+exports.getallposts = () => {
+  return readPostFile();
+}
+exports.createPost = (post) => {
+  const posts = readPostFile();
+  const newPost = {id:generateId(), ...post,createdAt: new Date().toISOString()}
+  posts.push(newPost)
+  writePostsFile(posts)
+  return newPost
+}
 
- posts.push(newPost);
-  writePostsToFile(posts);
-  return newPost;
-};
-exports.getPostById = (id) => {
-  const posts = readPostsFromFile();
-  return posts.find(post => post.id === id);
-};
-exports.deletePost = (id) => {
-  let posts = readPostsFromFile();
-  const originalLength = posts.length;
-  posts = posts.filter(post => post.id !== id);
-
-  if (posts.length < originalLength) {
-    writePostsToFile(posts);
-    return true;
-  }
-
-  return false;
-};
+exports.updatePost = (id,updatedPost) => {
+  const posts = readPostFile();
+  const index = posts.findIndex(post => post.id === id );
+  b 
+}
