@@ -5,7 +5,7 @@ const localStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 const { body, validationResult } = require('express-validator')
 const cookieParser = require('cookie-parser')
-
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const app = express()
 const port = 3000
