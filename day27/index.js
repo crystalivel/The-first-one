@@ -1,16 +1,12 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const { findByIdAndDelete, findOneAndDelete } = require('../taskmanager/models/task')
 
 const app = express()
 app.use(express.json())
 const port = 5100
 const MONGO_URI='mongodb://localhost:27017/taskdb'
 
-mongoose.connect(MONGO_URI,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true
-})
+mongoose.connect(MONGO_URI)
 
 // error handeling middleware 
 const errorHandler = fn => (req,res,next) => { Promise.resolve(fn(req,res,next)).catch(next)}
@@ -62,11 +58,6 @@ app.get('/user/email',errorHandler( async (req,res) => {
 //get by name and email
 app.get('/user', errorHandler(async (req, res) => {
   const { email, name } = req.query
-
-  if (!email && !name) {
-    return res.status(400).json({ message: 'Email or name is required' })
-  }
-
   let user
   if (email) {
     user = await User.findOne({ Email: email })
