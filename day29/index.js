@@ -1,15 +1,13 @@
+require ('dotenv').config();
 const express = require('express')
-const mongoose = require('mongoose')
-const Products = require('./product-schema')
-
-
+const {ServerApiVersion } = require('mongodb');
+const mongoose = require('mongoose');
+const Products = require('../day28/product-schema.js')
+port = 5100
 const app = express()
 app.use(express.json())
-const port = 5100
-const MONGO_URI = 'mongodb://localhost:27017/taskdb'
-
-mongoose.connect(MONGO_URI)
-
+const uri = process.env.MONGODB_URI
+mongoose.connect(uri)
 const errorHandler = fn => (req,res,next) => { Promise.resolve(fn(req,res,next)).catch(next)}
 
 //show all products in asending order
@@ -23,11 +21,19 @@ app.post('/',errorHandler(async(req,res)=> {
     if (!newProduct){res.status(404).json({message:'error'})}
     res.status(201).send(newProduct)
 }))
+//update with name 
+app.put("/:id",errorHandler(async(req,res) => {
+    const product = await Products.findOneAndUpdate({name:req.params.id},req.body , {new:true})
+    res.json(product)
+}))
 // filter products by price and stock
 app.get('/products',errorHandler(async(req,res)=> {
     const {price,page} = req.query
     let pageSize = 5
-    const product = await Products.find().sort({price:-1}).skip((page - 1)* pageSize).limit(pageSize)
+    const product = await Products
+    .find()
+    .sort({price:-1})
+    .skip((page - 1)* pageSize).limit(pageSize)
         res.status(200).send(product)
 }))
 app.get('/stock',errorHandler(async(req,res)=> {
@@ -66,3 +72,4 @@ app.use((err,req,res,next) => {
     app.listen(port,() => {
     console.log(`the server is listening on ${port}`)
 })
+
