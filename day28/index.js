@@ -34,7 +34,8 @@ app.get('/stock',errorHandler(async(req,res)=> {
     const product = await Products.aggregate([{
         $group:{
             _id: "$inStock",
-            count:{ $sum: 1}
+            count:{ $sum: 1},
+            name: {$push:"$name"}
         }
     }])
     res.status(200).send(product)
@@ -43,7 +44,7 @@ app.get('/avg',errorHandler(async(req,res) => {
     const product = await Products.aggregate([{
         $group:{
             _id:"",
-            averagePrice: {$avg:"$price"},
+            averagePrice: {$avg:"$price"}
         }
     }])
     res.status(200).send(product)

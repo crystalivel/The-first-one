@@ -1,3 +1,4 @@
+require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -26,6 +27,7 @@ app.use((err, req, res, next) => {
     }
   })
 })
+
 app.use(
   session({
     secret: 'mySecretKey',
@@ -33,7 +35,7 @@ app.use(
     saveUninitialized: false
   })
 );
-const JWT_secret = 'very wery secret'
+const JWT_secret = 'very wery secwet'
 // Routes
 app.get('/', (req, res) => {
   res.send(`<h1>Welcome to the Sample Vulnerable Node.js Application</h1>`);
@@ -46,6 +48,7 @@ app.get('/register', (req, res) => {
       <input type="password" name="password" placeholder="Password" required><br>
       <button type="submit">register</button>
     </form>
+    <a href="http://localhost:1000/auth/google">Login with Google</a>
   `);
 });
 

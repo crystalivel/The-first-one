@@ -1,6 +1,5 @@
 require ('dotenv').config();
 const express = require('express')
-const {ServerApiVersion } = require('mongodb');
 const mongoose = require('mongoose');
 const Products = require('../day28/product-schema.js')
 port = 5100
