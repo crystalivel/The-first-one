@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: darkgrey;
+    color: white;
+    line-height: 1.6;
+}
+
+input,
+button,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.608);
+    color: white;
+    border: 1px solid #0b0b0b;
+    border-radius: 4px;
+}
+
+button {
+    cursor: pointer;
+    background-color: #e50914;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #b2070fdf;
+    box-shadow: 2px 2px 2px grey;
+}
+
+nav {
+    padding: 1rem 2rem;
+    display: block;
+    background-color: #222;
+    padding: 10px 20px;
+    display: flex;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-right: 1.5rem;
+    margin-right: 20px;
+    display: block;
+}
+
+nav ul li a {
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #f8f8f8;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #ffcc00;
+}
+
+nav .logo {
+    height: 40px;
+    width: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+#pricing-table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: #373535;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#pricing-table th,
+#pricing-table td {
+    border: 1px solid #9a9a9a;
+    padding: 15px;
+    text-align: center;
+}
+
+#pricing-table th {
+    background-color: gray;
+    color: black;
+    font-size: 1.1rem;
+}
+
+#pricing-table tr:nth-child(even) {
+    background-color: grey;
+}
+
+#pricing-table tr:hover {
+    background-color: lightslategray;
+}
+
+#hero {
+    margin: 6rem auto 2rem auto;
+    display: block;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 1000px;
+}
+
+#hero h1 {
+    margin-bottom: 15px;
+}
+
+#hero video {
+    width: 100%;
+    max-width: 800px;
+    display: block;
+    margin-bottom: 15px;
+    border: 2px solid blue;
+    border-radius: 6px;
+}
+
+#hero button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#new-releases {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid ivory;
+}
+
+#new-releases h2 {
+    margin-bottom: 20px;
+}
+
+#new-releases .movie {
+    display: inline-block;
+    width: 45%;
+    margin: 2%;
+    vertical-align: top;
+    padding: 10px;
+    border: 1px solid white;
+}
+
+#new-releases img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+#movie-list .movies {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-column-end: 3;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+}
